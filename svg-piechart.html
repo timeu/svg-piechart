@@ -1,0 +1,113 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+The `svg-piechart` element draws a piechart using SVG
+
+##### Example
+
+    <svg-piechart size="50" data="[10,20,40,50]"></svg-piechart>
+
+@element svg-piechart
+@blurb Draws a piechart using DOM and CSS3
+@status alpha
+@homepage http://timeu.github.io/svg-piechart
+-->
+<polymer-element name="svg-piechart" attributes="size data">
+ <template>
+   <style>
+     :host {
+       display:block;
+     }
+     .slice {
+       
+     }
+   </style>
+    <svg id="svg" width="{{size}}" height="{{size}}" viewBox="0 0 360 360">
+      <template repeat="{{arc in arcs}}">
+        <path class="style" d="M180,180 L{{arc.x1}},{{arc.y1}} A180,180 0 {{arc.largeArcFlag}},1 {{arc.x2}},{{arc.y2}} z"style="fill: {{arc.color}}"/>
+      </template>
+    </svg>
+  </template>
+  <script>
+     (function() {
+
+       var DEFAULT_COLORS20  =  ["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"];
+       var DEFAULT_COLORS10  =  ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"];
+
+
+       Polymer('svg-piechart',{
+         /**
+         * The `colors` attribute specifies the colors to be used for each slice.
+         * If no colors are specified then the default-colors are used.
+         * 
+         * @attribute colors
+         * @type array[string]
+         */
+        colors: null,
+
+        /**
+         * The `size` property specifies the size of the piechart (Default: 50).
+         * 
+         * @attribute size
+         * @type number
+         */
+        size: 50,
+        /**
+         * The `data` property specifies the values for each slice .
+         * 
+         * @attribute data
+         * @type array[number]
+        */
+         arcs : null,
+         baseColor_ : "transparent",
+         observe : {
+           data : 'render_',
+         },
+         created : function() {
+           this.data = this.data || [];
+         },
+         getColors_ : function() {
+          var colors = this.colors;
+          if (!colors) {
+            colors = this.data.length > 10  ? DEFAULT_COLORS20 : DEFAULT_COLORS10;
+          }
+          return colors;
+         },
+         getTotal_: function() {
+          var total = 0;
+          for (var i =0;i<this.data.length;i++) {
+            total += this.data[i];
+          }
+          return total;
+
+         },
+         getArcs_ : function() {
+           var colors = this.getColors_();
+           var total = this.getTotal_();
+           var startAngle =  0;
+           var endAngle = -90;
+           var arcs = [];
+           for(var i=0; i < this.data.length; i++){
+                var angle = (360 * this.data[i]/total);
+                var largeArcFlag=0;
+                if (angle>180) {largeArcFlag = 1;}
+                
+                startAngle = endAngle;
+                endAngle = startAngle + angle;
+
+                x1 = ((180 + 180*Math.cos(Math.PI*startAngle/180)));
+                y1 = ((180 + 180*Math.sin(Math.PI*startAngle/180)));
+                x2 = ((180 + 180*Math.cos(Math.PI*endAngle/180)));
+                y2 = ((180 + 180*Math.sin(Math.PI*endAngle/180))); 
+                color = colors[i];
+                arcs.push({x1:x1,y1:y1,x2:x2,y2:y2,largeArcFlag:largeArcFlag,color:color});
+
+            }
+            return arcs;
+         },
+         render_ : function() {
+           this.arcs = this.getArcs_();
+         }
+     })
+   })();
+  </script>
