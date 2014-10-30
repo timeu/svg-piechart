@@ -21,19 +21,19 @@ Or [download as ZIP](https://github.com/timeu/svg-piechart/archive/master.zip).
 
   ```html
 <script src="bower_components/platform/platform.js"></script>
-  ```
+```
 
 2. Import Custom Element:
 
   ```html
 <link rel="import" href="bower_components/svg-piechart/svg-piechart.html">
-  ```
+```
 
 3. Start using it!
 
   ```html
-  <svg-piechart size="250" data="[10,20,50,20]"></svg-piechart>
-  
+<svg-piechart size="250" data="[10,20,50,20]"></svg-piechart>
+```
 
 ## Options
 
@@ -62,7 +62,7 @@ IE 10+ ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ |
 
 ## History
 
-Check [Release](https://github.com/timeu/google-map-markerclusterer/releases) list.
+Check [Release](https://github.com/timeu/svg-piechart/releases) list.
 
 ## License
 
