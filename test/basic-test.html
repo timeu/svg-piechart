@@ -1,0 +1,91 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <!-- Step 1: import the element to test -->
+    <link rel="import" href="../svg-piechart.html">
+  </head>
+  <body>
+
+    <!-- You can use the document as a place to set up your fixtures. -->
+    <svg-piechart></svg-piechart>
+
+    <script>
+      var myEl = document.querySelector('svg-piechart');
+
+      suite('<css-piechart>', function() {
+        // Clean up after ourselves.
+        teardown(function(done) {
+          myEl.colors = [];
+          myEl.data = []
+          myEl.size = 50;
+          flush(done);
+        });
+        
+        test('defaults', function() {
+          assert.equal(myEl.colors.length,0);
+          assert.equal(myEl.size,50);
+          assert.equal(myEl.data.length,0);
+        });
+        
+        test('get custom colors when defined',function() {
+          var customColors = ['red','green','blue']; 
+          myEl.colors = customColors;
+          assert.equal(myEl.colors,customColors); 
+          assert.equal(myEl._getColors(customColors),customColors);
+        });
+        
+        test('get 10 colors when slices <=10',function() {
+          assert.equal(myEl.colors.length,0); 
+          assert.equal(myEl._getColors([]).length,10);
+        });
+        test('get 20 colors when slices > 10',function() {
+          assert.equal(myEl.colors.length,0);
+          myEl.data = [1,2,3,4,5,6,7,8,9,10,11]; 
+          assert.equal(myEl._getColors().length,20);
+        });
+        test('calculate total',function() {
+          var data = [1,2,4,5,6,7,8,9,10];
+          assert.equal(myEl._calculateTotal(data),52);
+        });
+        test('compute arcs', function() {
+          var arcsToCheck = [{color:'red',x1:180,x2:351.19017293312766,largeArcFlag:0,y1:0,y2:124.37694101250946},
+                             {color:'green',x1:351.19017293312766,x2:74.19865458735485,largeArcFlag:0,y1:124.37694101250946,y2:325.62305898749054},
+                             {color:'blue',x1:74.19865458735485,x2:179.99999999999997,largeArcFlag:0,y1:325.62305898749054,y2:0}]
+          var data = [20,40,40];
+          var colors = ['red','green','blue'];
+          var arcs = myEl._calculateArcs(colors,data);
+          assert.equal(arcs.length,3);
+          assert.deepEqual(arcs,arcsToCheck);
+        });
+        test('test DOM', function(done) {
+          myEl.data = [20,40,40];
+          myEl.colors = ['red','green','blue'];
+          var background = Polymer.dom(myEl.root).querySelector("#svg");
+          assert.equal(background.getAttribute("width"),50);
+          assert.equal(background.getAttribute("height"),50);
+          async.nextTick(function() {
+            var slicesEl = Polymer.dom(myEl.root).querySelectorAll('.slice');
+            assert.equal(slicesEl.length,3);
+            done();
+          });
+        });
+      });
+    </script>
+
+  </body>
+</html>

@@ -3,14 +3,14 @@
 > A web-component to draw a piechart using Polymer and SVG.
 
 ## Demo
-> [Check it live](http://timeu.github.io/svg-piechart/components/svg-piechart/demo.html).
+> [Check it live](http://timeu.github.io/svg-piechart/components/svg-piechart/demo/index.html).
 
 ## Install
 
 Install the component using [Bower](http://bower.io/):
 
 ```sh
-$ bower install svg-piechart --save
+$ bower install --save svg-piechart 
 ```
 
 Or [download as ZIP](https://github.com/timeu/svg-piechart/archive/master.zip).
@@ -20,30 +20,24 @@ Or [download as ZIP](https://github.com/timeu/svg-piechart/archive/master.zip).
 1. Import Web Components' polyfill:
 
   ```html
-<script src="bower_components/platform/platform.js"></script>
+<script src="../webcomponentsjs/webcomponents-lite.js"></script>
   ```
 
 2. Import Custom Element:
 
   ```html
-<link rel="import" href="bower_components/svg-piechart/svg-piechart.html">
+<link rel="import" href="../svg-piechart/svg-piechart.html">
   ```
 
 3. Start using it!
 
   ```html
   <svg-piechart size="250" data="[10,20,50,20]"></svg-piechart>
-  
+  ```
 
 ## Options
 
 See the [component page](http://timeu.github.io/svg-piechart) for more information.
-
-Attribute | Options         | Default                    | Description
----       | ---             | ---                        | ---
-`size` | number | 50 | The size of the piechart in pixel. 
-`data`    | array[number]    | null | The values for each slice.
-`colors`   | array[string]           | ColorBrewer Colors                  | Specifies the colors to be used for each slice of the piechart. 
 
 
 ## Browser Support
@@ -62,7 +56,7 @@ IE 10+ ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ |
 
 ## History
 
-Check [Release](https://github.com/timeu/google-map-markerclusterer/releases) list.
+Check [Release](https://github.com/timeu/svg-piechart/releases) list.
 
 ## License
 
