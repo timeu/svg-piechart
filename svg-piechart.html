@@ -32,9 +32,6 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
     :host {
       display:block;
     }
-
-    .slice {
-    }
    </style>
    
    <template>
@@ -103,7 +100,7 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
       },
 
       /**
-      * The `size` property specifies the size of the piechart (Default: 50).
+      * The `size` property specifies the size of the piechart (Default: 150).
       * 
       * @attribute size
       */
@@ -157,7 +154,7 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
     _calculateArcs: function(colors, data) {
       var total = this._calculateTotal(data);
       var colors = this._getColors(colors);
-      var startAngle =  0;
+      var startAngle = 0;
       var endAngle = -90;
       var arcs = [];
 
@@ -177,7 +174,8 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
           x2: 180 + 180*Math.cos(Math.PI*endAngle/180),
           y2: 180 + 180*Math.sin(Math.PI*endAngle/180),
           largeArcFlag: largeArcFlag,
-          color: colors[i]});
+          color: colors[i]
+        });
       }
 
       return arcs;
