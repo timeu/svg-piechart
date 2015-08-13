@@ -16,126 +16,181 @@ The `svg-piechart` element draws a piechart using SVG
 
 <dom-module id="svg-piechart">
   <style>
-     :host {
-       display:block;
-     }
-     .slice {
-     }
+    :host {
+      display:block;
+    }
+
+    .slice:hover + text {
+    }
    </style>
    
    <template>
-     <svg id="svg" width$="[[size]]" height$="[[size]]" viewBox="0 0 360 360">
-       <!-- 
-              <template is="dom-repeat"  {{_arcs}}>
-       <path class="slice" d="M180,180 L{{item.x1}},{{item.y1}} A180,180 0 {{item.largeArcFlag}},1 {{item.x2}},{{item.y2}} z"style="fill: {{item.color}}"/>
-      </template>-->
+    <svg id="svg" width$="[[size]]" height$="[[size]]" viewBox="0 0 360 360">
+      <!-- <template is="dom-repeat" items={{_arcs}}>
+          <path class="slice" d="M180,180 L{{item.x1}},{{item.y1}} A180,180 0 {{item.largeArcFlag}},1 {{item.x2}},{{item.y2}} z"style="fill: {{item.color}}" />
+      </template> -->
     </svg>
   </template>
   
 </dom-module>
 
 <script>
-     (function() {
+(function() {
 
-       var DEFAULT_COLORS20  =  ["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"];
-       var DEFAULT_COLORS10  =  ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"];
+  var DEFAULT_COLORS16 = [
+    '#f44336',
+    '#e91e63',
+    '#9c27b0',
+    '#673ab7',
+    '#3f51b5',
+    '#1e88e5',
+    '#03a9f4',
+    '#00bcd4',
+    '#009688',
+    '#4caf50',
+    '#8bc34a',
+    '#cddc39',
+    '#ffeb3b',
+    '#ffc107',
+    '#ff9800',
+    '#ff5722'
+  ];
+  var DEFAULT_COLORS8 = [
+    '#f44336',
+    '#9c27b0',
+    '#3f51b5',
+    '#03a9f4',
+    '#009688',
+    '#8bc34a',
+    '#ffeb3b',
+    '#ff9800'
+  ];
+  var DEFAULT_COLORS4 = [
+    '#f44336',
+    '#3f51b5',
+    '#8bc34a',
+    '#ffeb3b',
+  ];
 
 
-       Polymer({
-         
-         is: 'svg-piechart',
-         
-         properties: {
-             /**
-             * The `colors` attribute specifies the colors to be used for each slice.
-             * If no colors are specified then the default-colors are used.
-             * 
-             * @attribute colors
-             */
-            colors: {
-                type:Array,
-                value:function() {return []}
-            },
-            
-             /**
-             * The `size` property specifies the size of the piechart (Default: 50).
-             * 
-             * @attribute size
-             */
-            size: {
-               type:Number,
-               value:50
-            },
-            
-            /**
-             * The `data` property specifies the values for each slice .
-             * 
-             * @attribute data
-            */
-            data : {
-               type:Array,
-               value: function() { return []; }
-            } 
-         },
-         
-         observers: [
-             '_render(colors,data)'
-         ],
-         _calculateTotal: function(data) {
-          var total = 0;
-          for (var i =0;i<data.length;i++) {
-            total += data[i];
-          }
-          return total;
+  Polymer({
 
-         },
-         _computePath: function(arc) {
-             return "M180,180 L"+arc.x1+","+arc.y1+" A180,180 0 "+arc.largeArcFlag+",1 "+arc.x2+","+arc.y2+" z";
-         },
-         _getColors : function(colors) {
-            if (!colors || colors.length == 0) {
-              colors = this.data.length > 10  ? DEFAULT_COLORS20 : DEFAULT_COLORS10;
-            }
-            return colors;
-         },
-         _calculateArcs : function(colors,data) {
-           var total = this._calculateTotal(data);
-           var colors = this._getColors(colors);
-           var startAngle =  0;
-           var endAngle = -90;
-           var arcs = [];
-           for(var i=0; i < data.length; i++){
-                var angle = (360 * data[i]/total);
-                var largeArcFlag=0;
-                if (angle>180) {largeArcFlag = 1;}
-                
-                startAngle = endAngle;
-                endAngle = startAngle + angle;
+    is: 'svg-piechart',
 
-                x1 = ((180 + 180*Math.cos(Math.PI*startAngle/180)));
-                y1 = ((180 + 180*Math.sin(Math.PI*startAngle/180)));
-                x2 = ((180 + 180*Math.cos(Math.PI*endAngle/180)));
-                y2 = ((180 + 180*Math.sin(Math.PI*endAngle/180))); 
-                color = colors[i];
-                arcs.push({x1:x1,y1:y1,x2:x2,y2:y2,largeArcFlag:largeArcFlag,color:color});
+    properties: {
+      /**
+      * The `colors` attribute specifies the colors to be used for each slice.
+      * If no colors are specified then the default-colors are used.
+      * 
+      * @attribute colors
+      */
+      colors: {
+        type: Array,
+        value: function() {
+          return [];
+        }
+      },
 
-            }
-            return arcs;
-         },
-         _render : function(colors,data) {
-           var arcs = this._calculateArcs(colors,data);
-           var svg = Polymer.dom(this.$.svg);
-           while (svg.firstChild) {
-              svg.removeChild(svg.firstChild);
-           }
-           for (i =0;i<arcs.length;i++) {
-              var path = document.createElementNS('http://www.w3.org/2000/svg',"path");
-              path.classList.add("slice");
-              path.style.fill= arcs[i].color;
-              path.setAttributeNS(null,"d",this._computePath(arcs[i]));
-              svg.appendChild(path);
-           }
-         }
-     })
-   })();
+      /**
+      * The `size` property specifies the size of the piechart (Default: 50).
+      * 
+      * @attribute size
+      */
+      size: {
+        type: Number,
+        value: 50
+      },
+
+      /**
+      * The `data` property specifies the values for each slice .
+      * 
+      * @attribute data
+      */
+      data : {
+        type: Array,
+        value: function() {
+          return [];
+        }
+      } 
+    },
+
+    observers: [
+      '_render(colors, data)'
+    ],
+
+    _calculateTotal: function(data) {
+      var total = 0;
+      for (var i = 0; i < data.length; i++) {
+        total += data[i];
+      }
+      return total;
+    },
+
+    _computePath: function(arc) {
+      return "M180,180 L" + arc.x1 + "," + arc.y1 + " A180,180 0 " + arc.largeArcFlag + ",1 " + arc.x2 + "," + arc.y2 + " z";
+    },
+
+    _getColors: function(colors) {
+      if (!colors || colors.length == 0) {
+        // colors = this.data.length > 10  ? DEFAULT_COLORS20 : DEFAULT_COLORS10;
+        if (this.data.length > 8) {
+          colors = DEFAULT_COLORS16;
+        }
+        else if (this.data.length > 4) {
+          colors = DEFAULT_COLORS8;
+        }
+        else {
+          colors = DEFAULT_COLORS4;
+        }
+      }
+      return colors;
+    },
+
+    _calculateArcs: function(colors, data) {
+      var total = this._calculateTotal(data);
+      var colors = this._getColors(colors);
+      var startAngle =  0;
+      var endAngle = -90;
+      var arcs = [];
+
+      for (var i = 0; i < data.length; i++) {
+        var angle = (360*data[i]/total);
+        var largeArcFlag = 0;
+        if (angle > 180) {
+          largeArcFlag = 1;
+        }
+
+        startAngle = endAngle;
+        endAngle = startAngle + angle;
+
+        arcs.push({
+          x1: 180 + 180*Math.cos(Math.PI*startAngle/180),
+          y1: 180 + 180*Math.sin(Math.PI*startAngle/180),
+          x2: 180 + 180*Math.cos(Math.PI*endAngle/180),
+          y2: 180 + 180*Math.sin(Math.PI*endAngle/180),
+          largeArcFlag: largeArcFlag,
+          color: colors[i]});
+      }
+
+      return arcs;
+    },
+
+    _render: function(colors, data) {
+      var arcs = this._calculateArcs(colors, data);
+      var svg = Polymer.dom(this.$.svg);
+
+      while (svg.firstChild) {
+        svg.removeChild(svg.firstChild);
+      }
+
+      for (i = 0; i < arcs.length; i++) {
+        var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.classList.add('slice');
+        path.style.fill = arcs[i].color;
+        path.setAttribute('d', this._computePath(arcs[i]));
+        svg.appendChild(path);
+      }
+    }
+  });
+})();
 </script>
