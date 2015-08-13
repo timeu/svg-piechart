@@ -1,15 +1,28 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <!--
-The `svg-piechart` element draws a piechart using SVG
+`svg-piechart` draws a piechart using SVG. The absolut values are defined as an array in `data`.
 
-##### Example
+    <svg-piechart data="[10,20,40,50]"></svg-piechart>
 
-    <svg-piechart size="50" data="[10,20,40,50]"></svg-piechart>
+Height and width in pixels can be changed by setting `size`:
+
+    <svg-piechart size="250" data="[10,20,40,50]"></svg-piechart>
+
+There are three default color palettes included. They all use the official <a href="http://www.google.com/design/spec/style/color.html">Material Colors</a>. One has 4 different colors, one 8 and one 16. The chart element automatically uses the smallest palette that covers the amount of given values. (So with 6 given values, the 8-color-palette is used.)
+
+To use custom colors, set the `colors` property to an array of rgb or rgba values:
+
+    <svg-piechart
+      colors='["red", "#666", "#1e88e5", "rgba(255, 0, 20, .4)"]'
+      data="  [ 10,    20,     40,        50]">
+    </svg-piechart>
+
+
 
 @demo
-@element svg-piechart
-@blurb Draws a piechart using DOM and CSS3
+@element
+@blurb Draws a piechart using SVG.
 @status alpha
 @homepage http://timeu.github.io/svg-piechart
 -->
@@ -20,7 +33,7 @@ The `svg-piechart` element draws a piechart using SVG
       display:block;
     }
 
-    .slice:hover + text {
+    .slice {
     }
    </style>
    
@@ -86,9 +99,7 @@ The `svg-piechart` element draws a piechart using SVG
       */
       colors: {
         type: Array,
-        value: function() {
-          return [];
-        }
+        value: []
       },
 
       /**
@@ -98,7 +109,7 @@ The `svg-piechart` element draws a piechart using SVG
       */
       size: {
         type: Number,
-        value: 50
+        value: 150
       },
 
       /**
@@ -106,12 +117,10 @@ The `svg-piechart` element draws a piechart using SVG
       * 
       * @attribute data
       */
-      data : {
+      data: {
         type: Array,
-        value: function() {
-          return [];
-        }
-      } 
+        value: []
+      }
     },
 
     observers: [
@@ -127,12 +136,11 @@ The `svg-piechart` element draws a piechart using SVG
     },
 
     _computePath: function(arc) {
-      return "M180,180 L" + arc.x1 + "," + arc.y1 + " A180,180 0 " + arc.largeArcFlag + ",1 " + arc.x2 + "," + arc.y2 + " z";
+      return 'M180,180 L' + arc.x1 + ',' + arc.y1 + ' A180,180 0 ' + arc.largeArcFlag + ',1 ' + arc.x2 + ',' + arc.y2 + ' z';
     },
 
     _getColors: function(colors) {
       if (!colors || colors.length == 0) {
-        // colors = this.data.length > 10  ? DEFAULT_COLORS20 : DEFAULT_COLORS10;
         if (this.data.length > 8) {
           colors = DEFAULT_COLORS16;
         }

@@ -1,19 +1,71 @@
 <!doctype html>
 <html>
-<head>
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>svg-piechart Demo</title>
+  <head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>svg-piechart</title>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../svg-piechart.html">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../svg-piechart.html">
+    <link rel="import" href="../../paper-styles/demo-pages.html">
 
-</head>
-<body>
+    <style is="custom-style">
+      .vertical-section-container {
+        max-width: 48em;
+        margin: 0 auto;
+      }
+      .horizontal-section {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
 
-  <p>An example of using <code>&lt;svg-piechart></code>:</p>
+    <div class="vertical-section-container">
+      <div>
+        <h4>Normal</h4>
+        <div class="horizontal-section">
+          <svg-piechart data="[10,50,20,10]"></svg-piechart>
+        </div>
+      </div>
+      <div>
+        <h4>Bigger (<code>size</code> is <code>250</code>)</h4>
+        <div class="horizontal-section">
+          <svg-piechart size="250" data="[10,50,20,10]"></svg-piechart>
+        </div>
+      </div>
+      <div>
+        <h4>Custom colors</h4>
+        <div class="horizontal-section">
+          <svg-piechart
+            colors='[
+              "rgba(255, 0, 0, .1)",
+              "rgba(255, 0, 0, .3)",
+              "rgba(255, 0, 0, .5)",
+              "rgba(255, 0, 0, .7)",
+              "rgba(255, 0, 0, .9)"]'
+            data="[1,1,1,1,1]">
+          </svg-piechart>
+        </div>
+      </div>
+      <div>
+        <h4>Smallest default color palette (up to 4 different colors)</h4>
+        <div class="horizontal-section">
+          <svg-piechart data="[1,1,1,1]"></svg-piechart>
+        </div>
+      </div>
+      <div>
+        <h4>Mid-size default color palette (up to 8 different colors)</h4>
+        <div class="horizontal-section">
+          <svg-piechart data="[1,1,1,1,1,1,1,1]"></svg-piechart>
+        </div>
+      </div>
+      <div>
+        <h4>Biggest default color palette (up to 16 different colors)</h4>
+        <div class="horizontal-section">
+          <svg-piechart data="[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"></svg-piechart>
+        </div>
+      </div>
+    </div>
 
-  <svg-piechart size="250" data="[10,50,20,10]"></svg-piechart>
-  
-
-</body>
+  </body>
 </html>
