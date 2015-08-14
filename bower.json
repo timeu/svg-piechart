@@ -1,6 +1,6 @@
 {
   "name": "svg-piechart",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": ["Uemit Seren <uemit.seren@gmail.com>"],
   "description": "Element to draw a piechart on a SVG.",
   "keywords": "svg, piechart, polymer, web-components",
