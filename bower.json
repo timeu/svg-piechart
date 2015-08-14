@@ -9,8 +9,7 @@
   "homepage": "https://github.com/timeu/svg-piechart/",
   "ignore": [
     "/.*",
-    "/test/",
-    "/demo/"
+    "/test/"
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0"
