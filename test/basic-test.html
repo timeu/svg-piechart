@@ -38,7 +38,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         
         test('defaults', function() {
           assert.equal(myEl.colors.length,0);
-          assert.equal(myEl.size,50);
+          assert.equal(myEl.size,150);
           assert.equal(myEl.data.length,0);
         });
         
@@ -49,14 +49,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           assert.equal(myEl._getColors(customColors),customColors);
         });
         
-        test('get 10 colors when slices <=10',function() {
+        test('get 4 colors when slices <8',function() {
           assert.equal(myEl.colors.length,0); 
-          assert.equal(myEl._getColors([]).length,10);
+          assert.equal(myEl._getColors([]).length,4);
         });
-        test('get 20 colors when slices > 10',function() {
+        test('get 8 colors when slices > 4',function() {
           assert.equal(myEl.colors.length,0);
-          myEl.data = [1,2,3,4,5,6,7,8,9,10,11]; 
-          assert.equal(myEl._getColors().length,20);
+          myEl.data = [1,2,3,4,5]; 
+          assert.equal(myEl._getColors().length,8);
+        });    
+        test('get 16 colors when slices > 8',function() {
+          assert.equal(myEl.colors.length,0);
+          myEl.data = [1,2,3,4,5,6,7,8,9]; 
+          assert.equal(myEl._getColors().length,16);
         });
         test('calculate total',function() {
           var data = [1,2,4,5,6,7,8,9,10];
@@ -71,6 +76,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           var arcs = myEl._calculateArcs(colors,data);
           assert.equal(arcs.length,3);
           assert.deepEqual(arcs,arcsToCheck);
+        });
+         test('compute arcs for full circle', function() {
+          var arcsToCheck = [{color:'green',x1:180,x2:179.99,largeArcFlag:1,y1:0,y2:0}]
+          var data = [0,20,0];
+          var colors = ['red','green','blue'];
+          var arcs = myEl._calculateArcs(colors,data);
+          assert.equal(arcs.length,3);
+          assert.deepEqual(arcs[1],arcsToCheck[0])
         });
         test('test DOM', function(done) {
           myEl.data = [20,40,40];

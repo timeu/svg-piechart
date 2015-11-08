@@ -167,15 +167,18 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
 
         startAngle = endAngle;
         endAngle = startAngle + angle;
-
-        arcs.push({
+        var arc = {
           x1: 180 + 180*Math.cos(Math.PI*startAngle/180),
           y1: 180 + 180*Math.sin(Math.PI*startAngle/180),
           x2: 180 + 180*Math.cos(Math.PI*endAngle/180),
           y2: 180 + 180*Math.sin(Math.PI*endAngle/180),
           largeArcFlag: largeArcFlag,
           color: colors[i]
-        });
+        };
+        if (arc.x2 > 179.9 && arc.y2 === 0 && arc.largeArcFlag === 1) {
+          arc.x2 = 179.99; 
+        }
+        arcs.push(arc);
       }
 
       return arcs;
