@@ -31,6 +31,16 @@ Or [download as ZIP](https://github.com/timeu/svg-piechart/archive/master.zip).
 
 3. Start using it!
 
+<!--
+```
+<custom-element-demo>
+  <template>
+      <link rel=”import” href=”svg-piechart.html”>
+      <svg-piechart size="250" data="[10,20,50,20]"></svg-piechart>
+  </template>    
+</custom-element-demo>
+```
+-->
   ```html
   <svg-piechart size="250" data="[10,20,50,20]"></svg-piechart>
   ```
