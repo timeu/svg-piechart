@@ -63,7 +63,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         test('get 8 colors when slices > 4',function() {
           assert.equal(myEl.colors.length,0);
           myEl.data = [1,2,3,4,5];
-          assert.equal(myEl._getColors().length,8);
+          assert.equal(myEl._getColors(null).length,8);
         });
         test('get 16 colors when slices > 8',function() {
           assert.equal(myEl.colors.length,0);
