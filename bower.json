@@ -1,6 +1,6 @@
 {
   "name": "svg-piechart",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "authors": ["Uemit Seren <uemit.seren@gmail.com>"],
   "description": "Element to draw a piechart on a SVG.",
   "keywords": "svg, piechart, polymer, web-components",
@@ -12,10 +12,12 @@
     "/test/"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0"
+    "polymer": "Polymer/polymer#^1.9.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "web-component-tester": "*"
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   }
 }

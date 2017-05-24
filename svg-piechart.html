@@ -33,7 +33,7 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
       display:block;
     }
    </style>
-   
+
    <template>
     <svg id="svg" width$="[[size]]" height$="[[size]]" viewBox="0 0 360 360">
       <!-- <template is="dom-repeat" items={{_arcs}}>
@@ -41,7 +41,7 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
       </template> -->
     </svg>
   </template>
-  
+
 </dom-module>
 
 <script>
@@ -91,7 +91,7 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
       /**
       * The `colors` attribute specifies the colors to be used for each slice.
       * If no colors are specified then the default-colors are used.
-      * 
+      *
       * @attribute colors
       */
       colors: {
@@ -101,7 +101,7 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
 
       /**
       * The `size` property specifies the size of the piechart (Default: 150).
-      * 
+      *
       * @attribute size
       */
       size: {
@@ -111,7 +111,7 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
 
       /**
       * The `data` property specifies the values for each slice .
-      * 
+      *
       * @attribute data
       */
       data: {
@@ -153,7 +153,7 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
 
     _calculateArcs: function(colors, data) {
       var total = this._calculateTotal(data);
-      var colors = this._getColors(colors);
+      colors = this._getColors(colors);
       var startAngle = 0;
       var endAngle = -90;
       var arcs = [];
@@ -176,7 +176,7 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
           color: colors[i]
         };
         if (arc.x2 > 179.9 && arc.y2 === 0 && arc.largeArcFlag === 1) {
-          arc.x2 = 179.99; 
+          arc.x2 = 179.99;
         }
         arcs.push(arc);
       }
@@ -192,7 +192,7 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
         svg.removeChild(svg.firstChild);
       }
 
-      for (i = 0; i < arcs.length; i++) {
+      for (var i = 0; i < arcs.length; i++) {
         var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.classList.add('slice');
         path.style.fill = arcs[i].color;

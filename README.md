@@ -3,14 +3,14 @@
 > A web-component to draw a piechart using Polymer and SVG.
 
 ## Demo
-> [Check it live](http://timeu.github.io/svg-piechart/components/svg-piechart/demo/index.html).
+> [Check it live](https://www.webcomponents.org/element/timeu/svg-piechart).
 
 ## Install
 
 Install the component using [Bower](http://bower.io/):
 
 ```sh
-$ bower install --save svg-piechart 
+$ bower install --save svg-piechart
 ```
 
 Or [download as ZIP](https://github.com/timeu/svg-piechart/archive/master.zip).
@@ -46,16 +46,6 @@ Or [download as ZIP](https://github.com/timeu/svg-piechart/archive/master.zip).
   <svg-piechart size="250" data="[10,20,50,20]"></svg-piechart>
 ```
 
-## Options
-
-See the [component page](http://timeu.github.io/svg-piechart) for more information.
-
-
-## Browser Support
-
-![IE](https://raw.github.com/paulirish/browser-logos/master/internet-explorer/internet-explorer_48x48.png) | ![Chrome](https://raw.github.com/paulirish/browser-logos/master/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/paulirish/browser-logos/master/firefox/firefox_48x48.png) | ![Opera](https://raw.github.com/paulirish/browser-logos/master/opera/opera_48x48.png) | ![Safari](https://raw.github.com/paulirish/browser-logos/master/safari/safari_48x48.png)
---- | --- | --- | --- | --- |
-IE 10+ ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ |
 
 ## Contributing
 

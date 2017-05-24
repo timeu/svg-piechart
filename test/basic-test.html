@@ -22,45 +22,52 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <body>
 
     <!-- You can use the document as a place to set up your fixtures. -->
-    <svg-piechart></svg-piechart>
+    <test-fixture id="basic">
+      <template>
+        <svg-piechart></svg-piechart>
+      </template>
+    </test-fixture>
 
     <script>
-      var myEl = document.querySelector('svg-piechart');
 
       suite('<css-piechart>', function() {
+        var myEl;
+        setup(function() {
+          myEl = fixture('basic')
+        });
         // Clean up after ourselves.
-        teardown(function(done) {
+        /*teardown(function(done) {
           myEl.colors = [];
           myEl.data = []
           myEl.size = 50;
           flush(done);
-        });
-        
+        });*/
+
         test('defaults', function() {
           assert.equal(myEl.colors.length,0);
           assert.equal(myEl.size,150);
           assert.equal(myEl.data.length,0);
         });
-        
+
         test('get custom colors when defined',function() {
-          var customColors = ['red','green','blue']; 
+          var customColors = ['red','green','blue'];
           myEl.colors = customColors;
-          assert.equal(myEl.colors,customColors); 
+          assert.equal(myEl.colors,customColors);
           assert.equal(myEl._getColors(customColors),customColors);
         });
-        
+
         test('get 4 colors when slices <8',function() {
-          assert.equal(myEl.colors.length,0); 
+          assert.equal(myEl.colors.length,0);
           assert.equal(myEl._getColors([]).length,4);
         });
         test('get 8 colors when slices > 4',function() {
           assert.equal(myEl.colors.length,0);
-          myEl.data = [1,2,3,4,5]; 
+          myEl.data = [1,2,3,4,5];
           assert.equal(myEl._getColors().length,8);
-        });    
+        });
         test('get 16 colors when slices > 8',function() {
           assert.equal(myEl.colors.length,0);
-          myEl.data = [1,2,3,4,5,6,7,8,9]; 
+          myEl.data = [1,2,3,4,5,6,7,8,9];
           assert.equal(myEl._getColors().length,16);
         });
         test('calculate total',function() {
@@ -89,8 +96,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           myEl.data = [20,40,40];
           myEl.colors = ['red','green','blue'];
           var background = Polymer.dom(myEl.root).querySelector("#svg");
-          assert.equal(background.getAttribute("width"),50);
-          assert.equal(background.getAttribute("height"),50);
+          assert.equal(background.getAttribute("width"),150);
+          assert.equal(background.getAttribute("height"),150);
           async.nextTick(function() {
             var slicesEl = Polymer.dom(myEl.root).querySelectorAll('.slice');
             assert.equal(slicesEl.length,3);
