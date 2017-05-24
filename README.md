@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/timeu/svg-piechart.svg?branch=master)](https://travis-ci.org/timeu/svg-piechart)
+
 # &lt;svg-piechart&gt;
 
 > A web-component to draw a piechart using Polymer and SVG.
