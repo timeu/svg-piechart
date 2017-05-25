@@ -1,8 +1,10 @@
-[![Build Status](https://travis-ci.org/timeu/svg-piechart.svg?branch=master)](https://travis-ci.org/timeu/svg-piechart) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/timeu/svg-piechart)
+[![Build Status](https://travis-ci.org/timeu/svg-piechart.svg?branch=1.x)](https://travis-ci.org/timeu/svg-piechart) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/timeu/svg-piechart)
 
 # &lt;svg-piechart&gt;
 
 > A web-component to draw a piechart using Polymer and SVG.
+
+**This branch (1.x) works only with Polymer 1.x. For a Polymer 2.x version check out the master branch**
 
 ## Demo
 > [Check it live](https://www.webcomponents.org/element/timeu/svg-piechart).
