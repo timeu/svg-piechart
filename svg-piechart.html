@@ -35,11 +35,7 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
    </style>
 
    <template>
-    <svg id="svg" width$="[[size]]" height$="[[size]]" viewBox="0 0 360 360">
-      <!-- <template is="dom-repeat" items={{_arcs}}>
-          <path class="slice" d="M180,180 L{{item.x1}},{{item.y1}} A180,180 0 {{item.largeArcFlag}},1 {{item.x2}},{{item.y2}} z"style="fill: {{item.color}}" />
-      </template> -->
-    </svg>
+    <svg id="svg" width$="[[size]]" height$="[[size]]" viewBox="0 0 360 360"></svg>
   </template>
 
 </dom-module>
@@ -194,7 +190,14 @@ To use custom colors, set the `colors` property to an array of rgb or rgba value
 
       for (var i = 0; i < arcs.length; i++) {
         var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        path.classList.add('slice');
+        // IE11 does not support classList on SVG elements
+        if (path.classList) {
+          path.classList.add('slice');
+        }
+        else {
+          var c = path.getAttribute('class');
+          path.setAttribute('class','slice');
+        }
         path.style.fill = arcs[i].color;
         path.setAttribute('d', this._computePath(arcs[i]));
         svg.appendChild(path);
