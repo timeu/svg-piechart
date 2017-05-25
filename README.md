@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/timeu/svg-piechart.svg?branch=master)](https://travis-ci.org/timeu/svg-piechart)
+[![Build Status](https://travis-ci.org/timeu/svg-piechart.svg?branch=master)](https://travis-ci.org/timeu/svg-piechart) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/owner/my-element)
 
 # &lt;svg-piechart&gt;
 
