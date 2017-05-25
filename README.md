@@ -4,6 +4,12 @@
 
 > A web-component to draw a piechart using Polymer and SVG.
 
+**This branch (master) works only with Polymer 2.x. For a Polymer 1.x version check out the 1.x branch**
+
+## Versions (Polymer 2.x vs Polymer 1.x)
+The *master* branch and all *2.x.x* releases require `Polymer 2.x`.
+For `Polymer 1.x` support use *1.x.x* releases and the [1.x branch](https://github.com/timeu/svg-piechart/tree/1.x).
+
 ## Demo
 > [Check it live](https://www.webcomponents.org/element/timeu/svg-piechart).
 
