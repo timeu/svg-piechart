@@ -95,11 +95,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         test('test DOM', function(done) {
           myEl.data = [20,40,40];
           myEl.colors = ['red','green','blue'];
-          var background = Polymer.dom(myEl.root).querySelector("#svg");
+          var shRoot = myEl.shadowRoot;
+          var background = shRoot.querySelector("svg");
           assert.equal(background.getAttribute("width"),150);
           assert.equal(background.getAttribute("height"),150);
           async.nextTick(function() {
-            var slicesEl = Polymer.dom(myEl.root).querySelectorAll('.slice');
+            var slicesEl = shRoot.querySelectorAll('.slice');
             assert.equal(slicesEl.length,3);
             done();
           });
