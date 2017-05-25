@@ -23,75 +23,48 @@
   </head>
   <body>
     <div class="vertical-section-container centered">
-      <div>
         <h4>Normal</h4>
-        <div class="horizontal-section">
-          <demo-snippet>
-            <template>
-              <svg-piechart data="[10,50,20,10]"></svg-piechart>
-            </template>
-          </demo-snippet>
-        </div>
-      </div>
-      <div>
+        <demo-snippet class="centered-demo">
+          <template>
+            <svg-piechart data="[10,50,20,10]"></svg-piechart>
+          </template>
+        </demo-snippet>
         <h4>Bigger (<code>size</code> is <code>250</code>)</h4>
-        <div class="horizontal-section">
-          <demo-snippet>
-            <template>
-              <svg-piechart size="250" data="[10,50,20,10]"></svg-piechart>
-            </template>
-          </demo-snippet>
-        </div>
-      </div>
-      <div>
+        <demo-snippet class="centered-demo">
+          <template>
+            <svg-piechart size="250" data="[10,50,20,10]"></svg-piechart>
+          </template>
+        </demo-snippet>
         <h4>Custom colors</h4>
-        <div class="horizontal-section">
-         <demo-snippet>
-           <template>
-             <svg-piechart
-            colors='[
-              "rgba(255, 0, 0, .1)",
-              "rgba(255, 0, 0, .3)",
-              "rgba(255, 0, 0, .5)",
-              "rgba(255, 0, 0, .7)",
-              "rgba(255, 0, 0, .9)"]'
-            data="[1,1,1,1,1]">
+        <demo-snippet class="centered-demo">
+          <template>
+            <svg-piechart data="[1,1,1,1,1]"
+                          colors='["rgba(255, 0, 0, .1)",
+                                  "rgba(255, 0, 0, .3)",
+                                  "rgba(255, 0, 0, .5)",
+                                  "rgba(255, 0, 0, .7)",
+                                  "rgba(255, 0, 0, .9)"]'>
             </svg-piechart>
-           </template>
-         </demo-snippet>
-        </div>
-      </div>
-      <div>
+          </template>
+        </demo-snippet>
         <h4>Smallest default color palette (up to 4 different colors)</h4>
-        <div class="horizontal-section">
-          <demo-snippet>
-            <template>
-              <svg-piechart data="[1,1,1,1]"></svg-piechart>
-            </template>
-          </demo-snippet>
-        </div>
-      </div>
-      <div>
+        <demo-snippet class="centered-demo">
+          <template>
+            <svg-piechart data="[1,1,1,1]"></svg-piechart>
+          </template>
+        </demo-snippet>
         <h4>Mid-size default color palette (up to 8 different colors)</h4>
-        <div class="horizontal-section">
-          <demo-snippet>
-            <template>
-              <svg-piechart data="[1,1,1,1,1,1,1,1]"></svg-piechart>
-            </template>
-          </demo-snippet>
-        </div>
-      </div>
-      <div>
+        <demo-snippet class="centered-demo">
+          <template>
+            <svg-piechart data="[1,1,1,1,1,1,1,1]"></svg-piechart>
+          </template>
+        </demo-snippet>
         <h4>Biggest default color palette (up to 16 different colors)</h4>
-        <div class="horizontal-section">
-          <demo-snippet>
-            <template>
-              <svg-piechart data="[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"></svg-piechart>
-            </template>
-          </demo-snippet>
-        </div>
-      </div>
+        <demo-snippet class="centered-demo">
+          <template>
+            <svg-piechart data="[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"></svg-piechart>
+          </template>
+        </demo-snippet>
     </div>
-
   </body>
 </html>
